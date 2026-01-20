@@ -7,7 +7,12 @@ import com.graphhopper.GHRequest;
 import com.graphhopper.GHResponse;
 import com.graphhopper.GraphHopper;
 import com.graphhopper.ResponsePath;
+import com.graphhopper.util.Instruction;
+import com.graphhopper.util.InstructionList;
+import com.graphhopper.util.Translation;
 import org.springframework.stereotype.Service;
+
+import java.util.Locale;
 
 @Service
 public class RoutingService {
@@ -23,22 +28,21 @@ public class RoutingService {
         // Map the API request to a GH request
         GHRequest ghRequest = routeTranslator.toGHRequest(request);
 
-        ghRequest.setProfile(request.getProfile().label);
         ghRequest.putHint("elevation", true);
+        ghRequest.setLocale("en");
 
         // Perform the route request through the GH instance
         GHResponse res = hopper.route(ghRequest);
 
-        System.out.println("Number of paths found: " + res.getAll().size());
+        //System.out.println("Number of paths found: " + res.getAll().size());
 
-        // todo: add custom exception
         if (res.hasErrors()) throw new RuntimeException(res.getErrors().toString());
 
         ResponsePath path = res.getBest();
 
-        System.out.println("Path ascend: " + path.getAscend());
+        Translation tr = hopper.getTranslationMap().getWithFallBack(Locale.UK);
 
         // Map the GH response back to an API response
-        return routeTranslator.toAPIResponse(path);
+        return routeTranslator.toAPIResponse(path, tr);
     }
 }

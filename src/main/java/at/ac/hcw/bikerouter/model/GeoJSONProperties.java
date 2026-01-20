@@ -1,10 +1,16 @@
 package at.ac.hcw.bikerouter.model;
 
+import com.graphhopper.util.Instruction;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class GeoJSONProperties {
     private double distance;
     private long time;
     private double ascend;
     private double descend;
+    private List<RouteInstruction> instructions;
 
     public GeoJSONProperties() {}
 
@@ -13,6 +19,14 @@ public class GeoJSONProperties {
         this.time = time;
         this.ascend = ascend;
         this.descend = descend;
+    }
+
+    public GeoJSONProperties(double distance, long time, double ascend, double descend, List<RouteInstruction> instructions) {
+        this.distance = distance;
+        this.time = time;
+        this.ascend = ascend;
+        this.descend = descend;
+        this.instructions = instructions;
     }
 
     public double getDistance() {
@@ -45,5 +59,13 @@ public class GeoJSONProperties {
 
     public void setDescend(double descend) {
         this.descend = descend;
+    }
+
+    public List<RouteInstruction> getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(List<RouteInstruction> instructions) {
+        this.instructions = instructions;
     }
 }

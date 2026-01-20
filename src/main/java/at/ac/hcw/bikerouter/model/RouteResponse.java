@@ -12,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *         "coordinates": [[double, double], [double, double]]
  *     },
  *     "properties": {
- *         "distance": double,
- *         "time": int,
+ *         "distance": double, // meters
+ *         "time": int, // milliseconds
  *         "ascend": double,
  *         "descend": double
  *     }

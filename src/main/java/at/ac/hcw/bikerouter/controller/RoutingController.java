@@ -31,19 +31,23 @@ public class RoutingController {
     }
 
     @GetMapping(path = "/test-profile", produces = MediaType.APPLICATION_JSON_VALUE)
-    public RouteResponse testProfile(BikeProfile profile) {
-        // Start: Museumsquartier
-        RoutePoint start = new RoutePoint(48.20487, 16.35801);
+    public RouteResponse testProfile(@RequestParam BikeProfile profile) {
+        //RoutePoint start = new RoutePoint(48.20487, 16.35801); // Museumsquartier
+        RoutePoint start = new RoutePoint(48.17538, 16.29133); // Küniglberg
 
-        // Destination: FH Campus
-        RoutePoint destination = new RoutePoint(48.15975, 16.38305);
+        //RoutePoint destination = new RoutePoint(48.15975, 16.38305); // FH Campus
+        RoutePoint destination = new RoutePoint(48.19982, 16.31119); // Hütteldorfer Straße U
 
         RouteRequest request = new RouteRequest(start, destination, profile);
 
         return routingService.route(request);
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(
+            path = "/route",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     public RouteResponse route(@RequestBody RouteRequest request) {
         return routingService.route(request);
     }

@@ -24,14 +24,14 @@ public class GHConfig {
         hopper.setGraphHopperLocation("target/graph-cache");
 
         hopper.setEncodedValuesString(
-                "bike_priority, bike_access, roundabout, bike_average_speed, bike_road_access, foot_road_access, average_slope, mtb_rating, hike_rating, country, road_class, surface, bike_network"
+                "bike_priority, bike_access, roundabout, bike_average_speed, bike_road_access, foot_road_access, average_slope, mtb_rating, hike_rating, country, road_class, surface, bike_network, get_off_bike, max_speed"
         );
 
         hopper.setProfiles(
                 new Profile(BikeProfile.FAST.label).setCustomModel(GHUtility.loadCustomModelFromJar("bike.json")),
                 new Profile(BikeProfile.SAFE.label).setCustomModel(CustomModels.safe()),
-                new Profile(BikeProfile.COMFORT.label).setCustomModel(CustomModels.comfort()).putHint("elevation", true),
-                new Profile(BikeProfile.SCENIC.label).setCustomModel(CustomModels.safe())
+                new Profile(BikeProfile.COMFORT.label).setCustomModel(CustomModels.comfort()),
+                new Profile(BikeProfile.SCENIC.label).setCustomModel(CustomModels.scenic())
         );
 
         // enable landmarks for faster queries

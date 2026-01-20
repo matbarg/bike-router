@@ -13,7 +13,7 @@ public class CustomModels {
 
         m.addToPriority(If("road_class == PRIMARY || road_class == SECONDARY", MULTIPLY, "0.3"))
                 .addToPriority(If("bike_network == MISSING", MULTIPLY, "0.5"))
-                //.addToPriority(If("max_speed >= 30", MULTIPLY, "0.1"))
+                .addToPriority(If("max_speed >= 30", MULTIPLY, "0.1"))
                 .addToPriority(If("surface == GRAVEL || surface == UNPAVED", MULTIPLY, "0.6"));
 
         return CustomModel.merge(GHUtility.loadCustomModelFromJar("bike.json"), m);

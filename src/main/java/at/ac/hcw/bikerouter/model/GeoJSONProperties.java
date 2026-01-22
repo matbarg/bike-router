@@ -1,8 +1,7 @@
 package at.ac.hcw.bikerouter.model;
 
-import com.graphhopper.util.Instruction;
+import at.ac.hcw.bikerouter.preferences.BikeProfile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GeoJSONProperties {
@@ -10,23 +9,29 @@ public class GeoJSONProperties {
     private long time;
     private double ascend;
     private double descend;
+    private BikeProfile profile;
     private List<RouteInstruction> instructions;
+    private long calcTime;
 
     public GeoJSONProperties() {}
 
-    public GeoJSONProperties(double distance, long time, double ascend, double descend) {
+    public GeoJSONProperties(double distance, long time, double ascend, double descend, BikeProfile profile, long calcTime) {
         this.distance = distance;
         this.time = time;
         this.ascend = ascend;
         this.descend = descend;
+        this.profile = profile;
+        this.calcTime = calcTime;
     }
 
-    public GeoJSONProperties(double distance, long time, double ascend, double descend, List<RouteInstruction> instructions) {
+    public GeoJSONProperties(double distance, long time, double ascend, double descend, BikeProfile profile, long calcTime, List<RouteInstruction> instructions) {
         this.distance = distance;
         this.time = time;
         this.ascend = ascend;
         this.descend = descend;
         this.instructions = instructions;
+        this.profile = profile;
+        this.calcTime = calcTime;
     }
 
     public double getDistance() {
@@ -67,5 +72,21 @@ public class GeoJSONProperties {
 
     public void setInstructions(List<RouteInstruction> instructions) {
         this.instructions = instructions;
+    }
+
+    public BikeProfile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(BikeProfile profile) {
+        this.profile = profile;
+    }
+
+    public long getCalcTime() {
+        return calcTime;
+    }
+
+    public void setCalcTime(int calcTime) {
+        this.calcTime = calcTime;
     }
 }

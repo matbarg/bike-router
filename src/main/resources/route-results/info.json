@@ -1,0 +1,498 @@
+{
+  "elevation": true,
+  "encoded_values": {
+    "car_temporal_access": [
+      "MISSING",
+      "YES",
+      "NO"
+    ],
+    "urban_density": [
+      "RURAL",
+      "RESIDENTIAL",
+      "CITY"
+    ],
+    "max_speed": [
+      "\u003Enumber",
+      "\u003Cnumber"
+    ],
+    "road_class": [
+      "OTHER",
+      "MOTORWAY",
+      "TRUNK",
+      "PRIMARY",
+      "SECONDARY",
+      "TERTIARY",
+      "RESIDENTIAL",
+      "UNCLASSIFIED",
+      "SERVICE",
+      "ROAD",
+      "TRACK",
+      "BRIDLEWAY",
+      "STEPS",
+      "CYCLEWAY",
+      "PATH",
+      "LIVING_STREET",
+      "FOOTWAY",
+      "PEDESTRIAN",
+      "PLATFORM",
+      "CORRIDOR"
+    ],
+    "road_class_link": [
+      "true",
+      "false"
+    ],
+    "road_environment": [
+      "OTHER",
+      "ROAD",
+      "FERRY",
+      "TUNNEL",
+      "BRIDGE",
+      "FORD"
+    ],
+    "road_access": [
+      "YES",
+      "DESTINATION",
+      "CUSTOMERS",
+      "DELIVERY",
+      "FORESTRY",
+      "AGRICULTURAL",
+      "PRIVATE",
+      "OTHER",
+      "NO"
+    ],
+    "surface": [
+      "MISSING",
+      "PAVED",
+      "ASPHALT",
+      "CONCRETE",
+      "PAVING_STONES",
+      "COBBLESTONE",
+      "UNPAVED",
+      "COMPACTED",
+      "FINE_GRAVEL",
+      "GRAVEL",
+      "GROUND",
+      "DIRT",
+      "GRASS",
+      "SAND",
+      "WOOD",
+      "OTHER"
+    ],
+    "smoothness": [
+      "MISSING",
+      "EXCELLENT",
+      "GOOD",
+      "INTERMEDIATE",
+      "BAD",
+      "VERY_BAD",
+      "HORRIBLE",
+      "VERY_HORRIBLE",
+      "IMPASSABLE",
+      "OTHER"
+    ],
+    "hazmat": [
+      "YES",
+      "NO"
+    ],
+    "hazmat_tunnel": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "hazmat_water": [
+      "YES",
+      "PERMISSIVE",
+      "NO"
+    ],
+    "toll": [
+      "MISSING",
+      "NO",
+      "HGV",
+      "ALL"
+    ],
+    "track_type": [
+      "MISSING",
+      "GRADE1",
+      "GRADE2",
+      "GRADE3",
+      "GRADE4",
+      "GRADE5"
+    ],
+    "max_weight": [
+      "\u003Enumber",
+      "\u003Cnumber"
+    ],
+    "max_width": [
+      "\u003Enumber",
+      "\u003Cnumber"
+    ],
+    "max_height": [
+      "\u003Enumber",
+      "\u003Cnumber"
+    ],
+    "max_length": [
+      "\u003Enumber",
+      "\u003Cnumber"
+    ],
+    "lanes": [
+      "\u003Enumber",
+      "\u003Cnumber"
+    ],
+    "hike_rating": [
+      "\u003Enumber",
+      "\u003Cnumber"
+    ],
+    "mtb_rating": [
+      "\u003Enumber",
+      "\u003Cnumber"
+    ],
+    "horse_rating": [
+      "\u003Enumber",
+      "\u003Cnumber"
+    ],
+    "average_slope": [
+      "\u003Enumber",
+      "\u003Cnumber"
+    ],
+    "max_slope": [
+      "\u003Enumber",
+      "\u003Cnumber"
+    ],
+    "curvature": [
+      "\u003Enumber",
+      "\u003Cnumber"
+    ],
+    "bike_network": [
+      "MISSING",
+      "INTERNATIONAL",
+      "NATIONAL",
+      "REGIONAL",
+      "LOCAL",
+      "OTHER"
+    ],
+    "foot_network": [
+      "MISSING",
+      "INTERNATIONAL",
+      "NATIONAL",
+      "REGIONAL",
+      "LOCAL",
+      "OTHER"
+    ],
+    "country": [
+      "MISSING",
+      "AFG",
+      "AGO",
+      "AIA",
+      "ALB",
+      "AND",
+      "ARE",
+      "ARG",
+      "ARM",
+      "ATG",
+      "AUS",
+      "AUT",
+      "AZE",
+      "BDI",
+      "BEL",
+      "BEN",
+      "BFA",
+      "BGD",
+      "BGR",
+      "BHR",
+      "BHS",
+      "BIH",
+      "BLR",
+      "BLZ",
+      "BMU",
+      "BOL",
+      "BRA",
+      "BRB",
+      "BRN",
+      "BTN",
+      "BWA",
+      "CAF",
+      "CAN",
+      "CHE",
+      "CHL",
+      "CHN",
+      "CIV",
+      "CMR",
+      "COD",
+      "COG",
+      "COK",
+      "COL",
+      "COM",
+      "CPV",
+      "CRI",
+      "CUB",
+      "CYM",
+      "CYP",
+      "CZE",
+      "DEU",
+      "DJI",
+      "DMA",
+      "DNK",
+      "DOM",
+      "DZA",
+      "ECU",
+      "EGY",
+      "ERI",
+      "ESP",
+      "EST",
+      "ETH",
+      "FIN",
+      "FJI",
+      "FLK",
+      "FRA",
+      "FRO",
+      "FSM",
+      "GAB",
+      "GBR",
+      "GEO",
+      "GGY",
+      "GHA",
+      "GIB",
+      "GIN",
+      "GMB",
+      "GNB",
+      "GNQ",
+      "GRC",
+      "GRD",
+      "GRL",
+      "GTM",
+      "GUY",
+      "HND",
+      "HRV",
+      "HTI",
+      "HUN",
+      "IDN",
+      "IMN",
+      "IND",
+      "IOT",
+      "IRL",
+      "IRN",
+      "IRQ",
+      "ISL",
+      "ISR",
+      "ITA",
+      "JAM",
+      "JEY",
+      "JOR",
+      "JPN",
+      "KAZ",
+      "KEN",
+      "KGZ",
+      "KHM",
+      "KIR",
+      "KNA",
+      "KOR",
+      "KWT",
+      "LAO",
+      "LBN",
+      "LBR",
+      "LBY",
+      "LCA",
+      "LIE",
+      "LKA",
+      "LSO",
+      "LTU",
+      "LUX",
+      "LVA",
+      "MAR",
+      "MCO",
+      "MDA",
+      "MDG",
+      "MDV",
+      "MEX",
+      "MHL",
+      "MKD",
+      "MLI",
+      "MLT",
+      "MMR",
+      "MNE",
+      "MNG",
+      "MOZ",
+      "MRT",
+      "MSR",
+      "MUS",
+      "MWI",
+      "MYS",
+      "NAM",
+      "NER",
+      "NGA",
+      "NIC",
+      "NIU",
+      "NLD",
+      "NOR",
+      "NPL",
+      "NRU",
+      "NZL",
+      "OMN",
+      "PAK",
+      "PAN",
+      "PCN",
+      "PER",
+      "PHL",
+      "PLW",
+      "PNG",
+      "POL",
+      "PRK",
+      "PRT",
+      "PRY",
+      "PSE",
+      "QAT",
+      "ROU",
+      "RUS",
+      "RWA",
+      "SAU",
+      "SDN",
+      "SEN",
+      "SGP",
+      "SGS",
+      "SHN",
+      "SLB",
+      "SLE",
+      "SLV",
+      "SMR",
+      "SOM",
+      "SRB",
+      "SSD",
+      "STP",
+      "SUR",
+      "SVK",
+      "SVN",
+      "SWE",
+      "SWZ",
+      "SYC",
+      "SYR",
+      "TCA",
+      "TCD",
+      "TGO",
+      "THA",
+      "TJK",
+      "TKL",
+      "TKM",
+      "TLS",
+      "TON",
+      "TTO",
+      "TUN",
+      "TUR",
+      "TUV",
+      "TWN",
+      "TZA",
+      "UGA",
+      "UKR",
+      "URY",
+      "USA",
+      "UZB",
+      "VAT",
+      "VCT",
+      "VEN",
+      "VGB",
+      "VNM",
+      "VUT",
+      "WSM",
+      "XKX",
+      "YEM",
+      "ZAF",
+      "ZMB",
+      "ZWE"
+    ],
+    "hgv": [
+      "MISSING",
+      "YES",
+      "DESIGNATED",
+      "DESTINATION",
+      "DELIVERY",
+      "DISCOURAGED",
+      "AGRICULTURAL",
+      "NO"
+    ],
+    "crossing": [
+      "MISSING",
+      "RAILWAY_BARRIER",
+      "RAILWAY",
+      "TRAFFIC_SIGNALS",
+      "UNCONTROLLED",
+      "MARKED",
+      "UNMARKED",
+      "NO"
+    ],
+    "roundabout": [
+      "true",
+      "false"
+    ],
+    "get_off_bike": [
+      "true",
+      "false"
+    ]
+  },
+  "bbox": [-180, -90, 180, 90],
+  "profiles": [
+    {
+      "name": "car",
+      "tomtom": true,
+      "openstreetmap": true
+    },
+    {
+      "name": "small_truck",
+      "tomtom": true,
+      "openstreetmap": true
+    },
+    {
+      "openstreetmap": true,
+      "name": "car_delivery"
+    },
+    {
+      "openstreetmap": true,
+      "name": "car_avoid_ferry"
+    },
+    {
+      "openstreetmap": true,
+      "name": "car_avoid_motorway"
+    },
+    {
+      "openstreetmap": true,
+      "name": "car_avoid_toll"
+    },
+    {
+      "openstreetmap": true,
+      "name": "small_truck_delivery"
+    },
+    {
+      "openstreetmap": true,
+      "name": "truck"
+    },
+    {
+      "openstreetmap": true,
+      "name": "scooter"
+    },
+    {
+      "openstreetmap": true,
+      "name": "scooter_delivery"
+    },
+    {
+      "openstreetmap": true,
+      "name": "foot"
+    },
+    {
+      "openstreetmap": true,
+      "name": "hike"
+    },
+    {
+      "openstreetmap": true,
+      "name": "bike"
+    },
+    {
+      "openstreetmap": true,
+      "name": "mtb"
+    },
+    {
+      "openstreetmap": true,
+      "name": "racingbike"
+    }
+  ],
+  "version": "7.0"
+}

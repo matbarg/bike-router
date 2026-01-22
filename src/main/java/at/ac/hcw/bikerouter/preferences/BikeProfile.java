@@ -1,4 +1,4 @@
-package at.ac.hcw.bikerouter.util;
+package at.ac.hcw.bikerouter.preferences;
 
 public enum BikeProfile {
     FAST("bike_fast"),

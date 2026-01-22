@@ -1,10 +1,9 @@
 package at.ac.hcw.bikerouter.util;
 
 import at.ac.hcw.bikerouter.model.*;
+import at.ac.hcw.bikerouter.preferences.BikeProfile;
 import com.graphhopper.GHRequest;
 import com.graphhopper.ResponsePath;
-import com.graphhopper.util.CustomModel;
-import com.graphhopper.util.GHUtility;
 import com.graphhopper.util.Instruction;
 import com.graphhopper.util.Translation;
 import com.graphhopper.util.shapes.GHPoint;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Component
 public class RouteTranslator {
@@ -28,7 +26,7 @@ public class RouteTranslator {
     }
 
     // without instructions
-    public RouteResponse toAPIResponse(ResponsePath route) {
+    public RouteResponse toAPIResponse(ResponsePath route, BikeProfile profile, long calcTime) {
         // turn the PointList into a List of double arrays and add it to the GeoJSONGeometry
         List<Double[]> coordinates = new ArrayList<>();
 
@@ -40,7 +38,9 @@ public class RouteTranslator {
                 route.getDistance(),
                 route.getTime(),
                 route.getAscend(),
-                route.getDescend()
+                route.getDescend(),
+                profile,
+                calcTime
         );
 
         return new RouteResponse(
@@ -50,7 +50,7 @@ public class RouteTranslator {
     }
 
     // with instructions
-    public RouteResponse toAPIResponse(ResponsePath route, Translation tr) {
+    public RouteResponse toAPIResponse(ResponsePath route, BikeProfile profile, long calcTime, Translation tr) {
         // turn the PointList into a List of double arrays and add it to the GeoJSONGeometry
         List<Double[]> coordinates = new ArrayList<>();
 
@@ -74,6 +74,8 @@ public class RouteTranslator {
                 route.getTime(),
                 route.getAscend(),
                 route.getDescend(),
+                profile,
+                calcTime,
                 instructions
         );
 

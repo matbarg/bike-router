@@ -3,8 +3,9 @@ package at.ac.hcw.bikerouter.controller;
 import at.ac.hcw.bikerouter.model.RoutePoint;
 import at.ac.hcw.bikerouter.model.RouteRequest;
 import at.ac.hcw.bikerouter.model.RouteResponse;
+import at.ac.hcw.bikerouter.preferences.RoutingMode;
 import at.ac.hcw.bikerouter.service.RoutingService;
-import at.ac.hcw.bikerouter.util.BikeProfile;
+import at.ac.hcw.bikerouter.preferences.BikeProfile;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class RoutingController {
         // Destination: FH Campus
         RoutePoint destination = new RoutePoint(48.15975, 16.38305);
 
-        RouteRequest request = new RouteRequest(start, destination, BikeProfile.FAST);
+        RouteRequest request = new RouteRequest(start, destination, BikeProfile.FAST, 20, RoutingMode.PRESET, null);
 
         return routingService.route(request);
     }
@@ -38,7 +39,7 @@ public class RoutingController {
         //RoutePoint destination = new RoutePoint(48.15975, 16.38305); // FH Campus
         RoutePoint destination = new RoutePoint(48.19982, 16.31119); // Hütteldorfer Straße U
 
-        RouteRequest request = new RouteRequest(start, destination, profile);
+        RouteRequest request = new RouteRequest(start, destination, profile, 20, RoutingMode.PRESET, null);
 
         return routingService.route(request);
     }

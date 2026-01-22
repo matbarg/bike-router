@@ -1,11 +1,10 @@
 package at.ac.hcw.bikerouter.util;
 
+import at.ac.hcw.bikerouter.preferences.BikeProfile;
+import at.ac.hcw.bikerouter.preferences.CustomModelBuilder;
 import com.graphhopper.GraphHopper;
-import com.graphhopper.config.LMProfile;
 import com.graphhopper.config.Profile;
 import com.graphhopper.reader.dem.SRTMProvider;
-import com.graphhopper.util.CustomModel;
-import com.graphhopper.util.GHUtility;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -24,14 +23,14 @@ public class GHConfig {
         hopper.setGraphHopperLocation("target/graph-cache");
 
         hopper.setEncodedValuesString(
-                "bike_priority, bike_access, roundabout, bike_average_speed, bike_road_access, foot_road_access, average_slope, mtb_rating, hike_rating, country, road_class, surface, bike_network, get_off_bike, max_speed"
+                "car_access, bike_priority, bike_access, roundabout, bike_average_speed, bike_road_access, foot_road_access, average_slope, mtb_rating, hike_rating, country, road_class, surface, bike_network, get_off_bike, max_speed"
         );
 
         hopper.setProfiles(
-                new Profile(BikeProfile.FAST.label).setCustomModel(GHUtility.loadCustomModelFromJar("bike.json")),
-                new Profile(BikeProfile.SAFE.label).setCustomModel(CustomModels.safe()),
-                new Profile(BikeProfile.COMFORT.label).setCustomModel(CustomModels.comfort()),
-                new Profile(BikeProfile.SCENIC.label).setCustomModel(CustomModels.scenic())
+                new Profile(BikeProfile.FAST.label).setCustomModel(CustomModelBuilder.fast()),
+                new Profile(BikeProfile.SAFE.label).setCustomModel(CustomModelBuilder.safe()),
+                new Profile(BikeProfile.COMFORT.label).setCustomModel(CustomModelBuilder.comfort()),
+                new Profile(BikeProfile.SCENIC.label).setCustomModel(CustomModelBuilder.scenic())
         );
 
         // enable landmarks for faster queries

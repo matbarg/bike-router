@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Bicycle Routing</title>
 
     <link
@@ -9,21 +9,68 @@
             href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
 
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
 <div id="map"></div>
 
-<div id="route-card-container">
-    <div class="route-card">
-        <ul>
-            <li>Profile: Safe</li>
-            <li>Ascend: 30m</li>
-            <li>Descend: 10m</li>
-            <li>Distance: 3.6km</li>
-            <li>Time: 10min</li>
-        </ul>
+<div id="routing-controls" class="overlay">
+    <h3>Request Options</h3>
+    <form id="request-options">
+        <fieldset>
+            <label for="stop-counter">Stops:</label>
+            <input type="number" id="stop-counter" value="0" readonly>
+            <button type="button" class="inc-stop">+</button>
+            <button type="button" class="dec-stop">–</button>
+        </fieldset>
+        <fieldset style="margin-top: 5px">
+            <label><input type="checkbox" id="use-preferences" name="use-preferences">Use routing preferences</label>
+        </fieldset>
+    </form>
+    <div id="preferences" class="hidden">
+        <h3>Preferences</h3>
+        <form id="request-preferences">
+            <fieldset>
+                <label for="profile">Select a profile:</label>
+                <select id="profile" name="profile">
+                    <option value="FAST">Default</option>
+                    <option value="SAFE">Safe</option>
+                    <option value="COMFORT">Comfort</option>
+                    <option value="SCENIC">Scenic</option>
+                </select>
+            </fieldset>
+            <fieldset class="preference-section">
+                <legend>Avoid bad surfaces</legend>
+                <label><input type="radio" name="avoidBadSurfaces" value="DEFAULT" checked>Default</label>
+                <label><input type="radio" name="avoidBadSurfaces" value="LOW">Low</label>
+                <label><input type="radio" name="avoidBadSurfaces" value="HIGH">High</label>
+            </fieldset>
+            <fieldset class="preference-section">
+                <legend>Avoid hills</legend>
+                <label><input type="radio" name="avoidHills" value="DEFAULT" checked>Default</label>
+                <label><input type="radio" name="avoidHills" value="LOW">Low</label>
+                <label><input type="radio" name="avoidHills" value="HIGH">High</label>
+            </fieldset>
+            <fieldset class="preference-section">
+                <legend>Avoid main roads</legend>
+                <label><input type="radio" name="avoidTraffic" value="DEFAULT" checked>Default</label>
+                <label><input type="radio" name="avoidTraffic" value="LOW">Low</label>
+                <label><input type="radio" name="avoidTraffic" value="HIGH">High</label>
+            </fieldset>
+            <fieldset class="preference-section">
+                <legend>Prefer bike infrastructure</legend>
+                <label><input type="radio" name="preferBikeInfra" value="DEFAULT" checked>Default</label>
+                <label><input type="radio" name="preferBikeInfra" value="LOW">Low</label>
+                <label><input type="radio" name="preferBikeInfra" value="HIGH">High</label>
+            </fieldset>
+            <fieldset class="preference-section">
+                <legend>Prefer parks</legend>
+                <label><input type="radio" name="preferParks" value="DEFAULT" checked>Default</label>
+                <label><input type="radio" name="preferParks" value="LOW">Low</label>
+                <label><input type="radio" name="preferParks" value="HIGH">High</label>
+            </fieldset>
+        </form>
     </div>
 </div>
 

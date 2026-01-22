@@ -63,8 +63,8 @@ public class RouteTranslator {
         for (Instruction i : route.getInstructions()) {
             instructions.add(new RouteInstruction(
                     i.getName(),
-                     i.getDistance(), // todo in km?
-                    (int) i.getTime(), // todo in minutes?
+                     i.getDistance(),
+                    (int) i.getTime(),
                     i.getTurnDescription(tr)
             ));
         }

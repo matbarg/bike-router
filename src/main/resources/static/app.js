@@ -198,13 +198,17 @@ function addRoute(route, color) {
 }
 
 function routeCardHTML(routeResult, color, routeId) {
+    const distance = (routeResult.properties.distance / 1000).toFixed(2);
+    const ascend = routeResult.properties.descend.toFixed(0);
+    const descend = routeResult.properties.descend.toFixed(0);
+
     return `<div class="route-card" data-route-id="${routeId}" style="border-left-color: ${color}">
         <ul>
             <li><b>Profile:</b> ${routeResult.properties.profile}</li>
-            <li><b>Ascend:</b> ${routeResult.properties.ascend.toFixed(0)} m</li>
-            <li><b>Descend:</b> ${routeResult.properties.descend.toFixed(0)} m</li>
-            <li><b>Distance:</b> ${(routeResult.properties.distance / 1000).toFixed(2)} km</li>
             <li><b>Time:</b> ${(routeResult.properties.time / 1000 / 60).toFixed(0)} min</li>
+            <li><b>Distance:</b> ${distance} km</li>
+            <li><b>↑</b> ${ascend} m (${(ascend / distance).toFixed(0)} m/km)</li>
+            <li><b>↓</b> ${descend} m</li>
             <li><b>Calc Time:</b> ${routeResult.properties.calcTime} ms</li>
         </ul>
         <button class="show-instructions-btn">Show instructions</button>

@@ -90,7 +90,8 @@ map.on("click", e => {
         instructionsOverlay.querySelector(".instructions-content").innerHTML = "";
         activeRoutes = [];
         stopPoints = [];
-        removeRouteHighlight()
+        removeRouteHighlight();
+        history.replaceState(null, '', window.location.origin);
     }
 });
 
@@ -101,11 +102,13 @@ function makeRequest() {
 
     if (requestOptionsForm.elements["use-preferences"].checked) {
         // do a single request with the preferences
+        const preferences = getRequestPreferences()
+
         requestRoute(routePoints, {
             profile: "FAST",
             mode: "CUSTOM",
             speed: 20,
-            preferences: getRequestPreferences(),
+            preferences: preferences,
             color: "rgb(98,250,237)",
         });
 
@@ -122,6 +125,8 @@ function makeRequest() {
             },
             color: "rgb(234,101,43)",
         });
+
+        setShareRouteLink({points: routePoints, preferences: preferences});
     } else {
         // test out each profile preset
         const requests = [{
@@ -170,14 +175,13 @@ function requestRoute(points, r) {
         body: JSON.stringify(body)
     })
         .then(res => res.json())
-        .then(route => addRoute(route, r.color));
+        .then(route => addRoute(route, r.color))
+        .catch(err => console.log(err));
 }
 
 function addRoute(route, color) {
     routeCounter++;
     const routeId = String(routeCounter);
-
-    console.log(route);
 
     const layer = L.geoJSON(route, {
         style: {
@@ -238,10 +242,8 @@ routesOverlay.addEventListener("click", e => {
     const routeCard = btn.closest(".route-card");
     const routeId = routeCard.dataset.routeId;
 
-    console.log(activeRoutes);
-
     const route = activeRoutes.find(r => r.id === routeId);
-    console.log(route);
+
     if (!route) return;
 
     const content = instructionsOverlay.querySelector(".instructions-content");
@@ -355,9 +357,62 @@ function selectProfilePreferences(profile) {
 }
 
 document.getElementById("use-preferences").addEventListener("change", e => {
-   if (e.target.checked) {
-       document.getElementById("preferences").classList.remove("hidden");
-   } else {
-       document.getElementById("preferences").classList.add("hidden");
-   }
+    if (e.target.checked) {
+        document.getElementById("preferences").classList.remove("hidden");
+    } else {
+        document.getElementById("preferences").classList.add("hidden");
+    }
 });
+
+function setShareRouteLink(routeRequest) {
+    const from = routeRequest.points[0];
+    const to = routeRequest.points[routeRequest.points.length - 1];
+
+    const params = new URLSearchParams({
+        fromLat: from.lat.toFixed(5),
+        fromLon: from.lng.toFixed(5),
+        toLat: to.lat.toFixed(5),
+        toLon: to.lng.toFixed(5),
+        avoid_hills: routeRequest.preferences.avoidHills,
+        avoid_bad_surfaces: routeRequest.preferences.avoidBadSurfaces,
+        avoid_traffic: routeRequest.preferences.avoidTraffic,
+        prefer_bike_infra: routeRequest.preferences.preferBikeInfra,
+        prefer_parks: routeRequest.preferences.preferParks
+    });
+
+    history.replaceState(null, '', '?' + params.toString());
+}
+
+function loadRouteFromURL(params) {
+    const routePoints = [
+        {
+            lat: parseFloat(params.get('fromLat')),
+            lng: parseFloat(params.get('fromLon'))
+        },
+        {
+            lat: parseFloat(params.get('toLat')),
+            lng: parseFloat(params.get('toLon'))
+        }
+    ]
+
+    requestRoute(routePoints, {
+        profile: "FAST",
+        mode: "CUSTOM",
+        speed: 20,
+        preferences: {
+            avoidBadSurfaces: params.get('avoid_bad_surfaces') || 'DEFAULT',
+            avoidTraffic: params.get('avoid_traffic') || 'DEFAULT',
+            avoidHills: params.get('avoid_hills') || 'DEFAULT',
+            preferBikeInfra: params.get('prefer_bike_infra') || 'DEFAULT',
+            preferParks: params.get('prefer_parks') || 'DEFAULT',
+        },
+        color: "rgb(98,250,237)",
+    });
+}
+
+const params = new URLSearchParams(window.location.search);
+
+if (params.size > 0) {
+    console.log("load route from url");
+    loadRouteFromURL(params);
+}

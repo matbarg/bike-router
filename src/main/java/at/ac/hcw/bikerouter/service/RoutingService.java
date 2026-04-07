@@ -13,15 +13,19 @@ import com.graphhopper.ResponsePath;
 import com.graphhopper.util.Instruction;
 import com.graphhopper.util.InstructionList;
 import com.graphhopper.util.Translation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Locale;
 
 @Service
 public class RoutingService {
+    private static final Logger log = LoggerFactory.getLogger(RoutingService.class);
     private final GraphHopper hopper;
     private final RouteTranslator routeTranslator;
 
@@ -36,6 +40,15 @@ public class RoutingService {
 
         ghRequest.putHint("elevation", true);
         ghRequest.setLocale("en");
+
+        // path details
+        List<String> details = List.of(
+                "surface",
+                //"smoothness",
+                "max_speed",
+                "road_class",
+                "bike_network");
+        ghRequest.setPathDetails(details);
 
         if (request.getMode() == RoutingMode.PRESET) {
             System.out.println("Preset mode. Use profile " + request.getProfile());
@@ -58,6 +71,8 @@ public class RoutingService {
         if (res.hasErrors()) throw new RuntimeException(res.getErrors().toString());
 
         ResponsePath path = res.getBest();
+
+        System.out.println(path.getPathDetails());
 
         Translation tr = hopper.getTranslationMap().getWithFallBack(Locale.UK);
 

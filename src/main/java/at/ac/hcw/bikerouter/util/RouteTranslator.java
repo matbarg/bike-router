@@ -40,7 +40,8 @@ public class RouteTranslator {
                 route.getAscend(),
                 route.getDescend(),
                 profile,
-                calcTime
+                calcTime,
+                route.getRouteWeight()
         );
 
         return new RouteResponse(
@@ -76,6 +77,7 @@ public class RouteTranslator {
                 route.getDescend(),
                 profile,
                 calcTime,
+                route.getRouteWeight(),
                 instructions
         );
 

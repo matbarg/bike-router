@@ -12,19 +12,21 @@ public class GeoJSONProperties {
     private BikeProfile profile;
     private List<RouteInstruction> instructions;
     private long calcTime;
+    private double cost;
 
     public GeoJSONProperties() {}
 
-    public GeoJSONProperties(double distance, long time, double ascend, double descend, BikeProfile profile, long calcTime) {
+    public GeoJSONProperties(double distance, long time, double ascend, double descend, BikeProfile profile, long calcTime, double cost) {
         this.distance = distance;
         this.time = time;
         this.ascend = ascend;
         this.descend = descend;
         this.profile = profile;
         this.calcTime = calcTime;
+        this.cost = cost;
     }
 
-    public GeoJSONProperties(double distance, long time, double ascend, double descend, BikeProfile profile, long calcTime, List<RouteInstruction> instructions) {
+    public GeoJSONProperties(double distance, long time, double ascend, double descend, BikeProfile profile, long calcTime, double cost, List<RouteInstruction> instructions) {
         this.distance = distance;
         this.time = time;
         this.ascend = ascend;
@@ -32,6 +34,7 @@ public class GeoJSONProperties {
         this.instructions = instructions;
         this.profile = profile;
         this.calcTime = calcTime;
+        this.cost = cost;
     }
 
     public double getDistance() {

@@ -28,9 +28,10 @@
             <label><input type="checkbox" id="use-preferences" name="use-preferences">Use routing preferences</label>
         </fieldset>
     </form>
-    <div id="preferences" class="hidden">
+    <div id="preferences">
         <h3>Preferences</h3>
         <form id="request-preferences">
+            <!--
             <fieldset>
                 <label for="profile">Select a profile:</label>
                 <select id="profile" name="profile">
@@ -40,35 +41,18 @@
                     <option value="SCENIC">Scenic</option>
                 </select>
             </fieldset>
+            -->
             <fieldset class="preference-section">
                 <legend>Avoid bad surfaces</legend>
-                <label><input type="radio" name="avoidBadSurfaces" value="DEFAULT" checked>Default</label>
-                <label><input type="radio" name="avoidBadSurfaces" value="LOW">Low</label>
-                <label><input type="radio" name="avoidBadSurfaces" value="HIGH">High</label>
+                <label><input type="text" name="avoidBadSurfaces" value="1.0" checked></label>
             </fieldset>
             <fieldset class="preference-section">
                 <legend>Avoid hills</legend>
-                <label><input type="radio" name="avoidHills" value="DEFAULT" checked>Default</label>
-                <label><input type="radio" name="avoidHills" value="LOW">Low</label>
-                <label><input type="radio" name="avoidHills" value="HIGH">High</label>
-            </fieldset>
-            <fieldset class="preference-section">
-                <legend>Avoid main roads</legend>
-                <label><input type="radio" name="avoidTraffic" value="DEFAULT" checked>Default</label>
-                <label><input type="radio" name="avoidTraffic" value="LOW">Low</label>
-                <label><input type="radio" name="avoidTraffic" value="HIGH">High</label>
+                <label><input type="text" name="avoidHills" value="1.0" checked></label>
             </fieldset>
             <fieldset class="preference-section">
                 <legend>Prefer bike infrastructure</legend>
-                <label><input type="radio" name="preferBikeInfra" value="DEFAULT" checked>Default</label>
-                <label><input type="radio" name="preferBikeInfra" value="LOW">Low</label>
-                <label><input type="radio" name="preferBikeInfra" value="HIGH">High</label>
-            </fieldset>
-            <fieldset class="preference-section">
-                <legend>Prefer parks</legend>
-                <label><input type="radio" name="preferParks" value="DEFAULT" checked>Default</label>
-                <label><input type="radio" name="preferParks" value="LOW">Low</label>
-                <label><input type="radio" name="preferParks" value="HIGH">High</label>
+                <label><input type="text" name="preferBikeInfra" value="1.0" checked></label>
             </fieldset>
         </form>
     </div>

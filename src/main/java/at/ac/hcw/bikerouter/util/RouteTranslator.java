@@ -1,6 +1,6 @@
 package at.ac.hcw.bikerouter.util;
 
-import at.ac.hcw.bikerouter.model.*;
+import at.ac.hcw.bikerouter.dto.*;
 import at.ac.hcw.bikerouter.preferences.BikeProfile;
 import com.graphhopper.GHRequest;
 import com.graphhopper.ResponsePath;
@@ -14,11 +14,11 @@ import java.util.List;
 
 @Component
 public class RouteTranslator {
-    public GHRequest toGHRequest(RouteRequest apiRequest) {
+    public GHRequest toGHRequest(RouteRequestDto apiRequest) {
         GHRequest ghRequest = new GHRequest();
         ghRequest.setProfile(apiRequest.getProfile().label);
 
-        for (RoutePoint rp : apiRequest.getPoints()) {
+        for (PointDto rp : apiRequest.getPoints()) {
             ghRequest.addPoint(new GHPoint(rp.getLat(), rp.getLon()));
         }
 
@@ -26,7 +26,7 @@ public class RouteTranslator {
     }
 
     // without instructions
-    public RouteResponse toAPIResponse(ResponsePath route, BikeProfile profile, long calcTime) {
+    public RouteResponseDto toAPIResponse(ResponsePath route, BikeProfile profile, long calcTime) {
         // turn the PointList into a List of double arrays and add it to the GeoJSONGeometry
         List<Double[]> coordinates = new ArrayList<>();
 
@@ -44,14 +44,14 @@ public class RouteTranslator {
                 route.getRouteWeight()
         );
 
-        return new RouteResponse(
+        return new RouteResponseDto(
                 geometry,
                 properties
         );
     }
 
     // with instructions
-    public RouteResponse toAPIResponse(ResponsePath route, BikeProfile profile, long calcTime, Translation tr) {
+    public RouteResponseDto toAPIResponse(ResponsePath route, BikeProfile profile, long calcTime, Translation tr) {
         // turn the PointList into a List of double arrays and add it to the GeoJSONGeometry
         List<Double[]> coordinates = new ArrayList<>();
 
@@ -59,10 +59,10 @@ public class RouteTranslator {
 
         GeoJSONGeometry geometry = new GeoJSONGeometry(coordinates);
 
-        List<RouteInstruction> instructions = new ArrayList<>();
+        List<RouteInstructionDto> instructions = new ArrayList<>();
 
         for (Instruction i : route.getInstructions()) {
-            instructions.add(new RouteInstruction(
+            instructions.add(new RouteInstructionDto(
                     i.getName(),
                      i.getDistance(),
                     (int) i.getTime(),
@@ -81,7 +81,7 @@ public class RouteTranslator {
                 instructions
         );
 
-        return new RouteResponse(
+        return new RouteResponseDto(
                 geometry,
                 properties
         );

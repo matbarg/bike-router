@@ -1,49 +1,50 @@
-package at.ac.hcw.bikerouter.model;
+package at.ac.hcw.bikerouter.dto;
 
 import at.ac.hcw.bikerouter.preferences.BikeProfile;
 import at.ac.hcw.bikerouter.preferences.Preferences;
 import at.ac.hcw.bikerouter.preferences.RoutingMode;
+import jakarta.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RouteRequest {
-    private List<RoutePoint> points;
+public class RouteRequestDto {
+    private List<PointDto> points;
     private BikeProfile profile;
-    private int speed;
     private RoutingMode mode;
     private Preferences preferences;
+    private boolean withInstructions = true;
+    @Valid
+    private PreferencesDto preferencesDto;
 
-    public RouteRequest() {
+    public RouteRequestDto() {
         points = new ArrayList<>();
     }
 
-    public RouteRequest(RoutePoint start, RoutePoint destination, BikeProfile profile, int speed, RoutingMode mode, Preferences preferences) {
+    public RouteRequestDto(PointDto start, PointDto destination, BikeProfile profile, RoutingMode mode, Preferences preferences) {
         points = new ArrayList<>();
         points.add(start);
         points.add(destination);
         this.profile = profile;
-        this.speed = speed;
         this.mode = mode;
         this.preferences = preferences;
     }
 
-    public RouteRequest(RoutePoint start, RoutePoint destination, List<RoutePoint> via, BikeProfile profile, int speed, RoutingMode mode, Preferences preferences) {
+    public RouteRequestDto(PointDto start, PointDto destination, List<PointDto> via, BikeProfile profile, RoutingMode mode, Preferences preferences) {
         points = new ArrayList<>();
         points.add(start);
         points.addAll(via);
         points.add(destination);
         this.profile = profile;
-        this.speed = speed;
         this.mode = mode;
         this.preferences = preferences;
     }
 
-    public List<RoutePoint> getPoints() {
+    public List<PointDto> getPoints() {
         return points;
     }
 
-    public void setPoints(List<RoutePoint> points) {
+    public void setPoints(List<PointDto> points) {
         this.points = points;
     }
 
@@ -53,14 +54,6 @@ public class RouteRequest {
 
     public void setProfile(BikeProfile profile) {
         this.profile = profile;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
     }
 
     public RoutingMode getMode() {
@@ -77,5 +70,21 @@ public class RouteRequest {
 
     public void setPreferences(Preferences preferences) {
         this.preferences = preferences;
+    }
+
+    public PreferencesDto getPreferencesDto() {
+        return preferencesDto;
+    }
+
+    public void setPreferencesDto(PreferencesDto preferencesDto) {
+        this.preferencesDto = preferencesDto;
+    }
+
+    public boolean isWithInstructions() {
+        return withInstructions;
+    }
+
+    public void setWithInstructions(boolean withInstructions) {
+        this.withInstructions = withInstructions;
     }
 }

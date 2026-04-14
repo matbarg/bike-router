@@ -1,12 +1,12 @@
-package at.ac.hcw.bikerouter.model;
+package at.ac.hcw.bikerouter.dto;
 
-public class RouteInstruction {
+public class RouteInstructionDto {
     private String name;
     private double distance;
     private int time;
     private String description;
 
-    public RouteInstruction(String name, double distance, int time, String description) {
+    public RouteInstructionDto(String name, double distance, int time, String description) {
         this.name = name;
         this.distance = distance;
         this.time = time;

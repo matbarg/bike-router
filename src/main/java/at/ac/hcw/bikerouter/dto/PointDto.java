@@ -1,12 +1,12 @@
-package at.ac.hcw.bikerouter.model;
+package at.ac.hcw.bikerouter.dto;
 
-public class RoutePoint {
+public class PointDto {
     private double lat;
     private double lon;
 
-    public RoutePoint() {}
+    public PointDto() {}
 
-    public RoutePoint(double lat, double lon) {
+    public PointDto(double lat, double lon) {
         this.lat = lat;
         this.lon = lon;
     }

@@ -1,7 +1,7 @@
 package at.ac.hcw.bikerouter.service;
 
-import at.ac.hcw.bikerouter.model.RouteRequest;
-import at.ac.hcw.bikerouter.model.RouteResponse;
+import at.ac.hcw.bikerouter.dto.RouteRequestDto;
+import at.ac.hcw.bikerouter.dto.RouteResponseDto;
 import at.ac.hcw.bikerouter.preferences.BikeProfile;
 import at.ac.hcw.bikerouter.preferences.CustomModelBuilder;
 import at.ac.hcw.bikerouter.preferences.RoutingMode;
@@ -10,8 +10,6 @@ import com.graphhopper.GHRequest;
 import com.graphhopper.GHResponse;
 import com.graphhopper.GraphHopper;
 import com.graphhopper.ResponsePath;
-import com.graphhopper.util.Instruction;
-import com.graphhopper.util.InstructionList;
 import com.graphhopper.util.Translation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,13 +17,12 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Locale;
 
 @Service
 public class RoutingService {
-    private static final Logger log = LoggerFactory.getLogger(RoutingService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RoutingService.class);
     private final GraphHopper hopper;
     private final RouteTranslator routeTranslator;
 
@@ -34,7 +31,7 @@ public class RoutingService {
         this.routeTranslator = routeTranslator;
     }
 
-    public RouteResponse route(RouteRequest request) {
+    public RouteResponseDto route(RouteRequestDto request) {
         // Map the API request to a GH request
         GHRequest ghRequest = routeTranslator.toGHRequest(request);
 
@@ -55,8 +52,7 @@ public class RoutingService {
             ghRequest.setProfile(request.getProfile().label);
         } else if (request.getMode() == RoutingMode.CUSTOM) {
             ghRequest.setProfile(BikeProfile.FAST.label);
-            System.out.println("Custom mode. Use preferences " + request.getPreferences());
-            ghRequest.setCustomModel(CustomModelBuilder.build(request.getPreferences()));
+            ghRequest.setCustomModel(CustomModelBuilder.build(request.getPreferencesDto()));
         }
 
         Instant start = Instant.now();
@@ -72,11 +68,13 @@ public class RoutingService {
 
         ResponsePath path = res.getBest();
 
-        System.out.println(path.getPathDetails());
+        LOG.debug("Path details: {}", path.getPathDetails());
 
-        Translation tr = hopper.getTranslationMap().getWithFallBack(Locale.UK);
-
-        // Map the GH response back to an API response
-        return routeTranslator.toAPIResponse(path, request.getProfile(), timeElapsed.toMillis(), tr);
+        if (request.isWithInstructions()) {
+            Translation tr = hopper.getTranslationMap().getWithFallBack(Locale.UK);
+            return routeTranslator.toAPIResponse(path, request.getProfile(), timeElapsed.toMillis(), tr);
+        } else {
+            return routeTranslator.toAPIResponse(path, request.getProfile(), timeElapsed.toMillis());
+        }
     }
 }

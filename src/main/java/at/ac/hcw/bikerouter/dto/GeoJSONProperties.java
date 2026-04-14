@@ -1,4 +1,4 @@
-package at.ac.hcw.bikerouter.model;
+package at.ac.hcw.bikerouter.dto;
 
 import at.ac.hcw.bikerouter.preferences.BikeProfile;
 
@@ -10,7 +10,7 @@ public class GeoJSONProperties {
     private double ascend;
     private double descend;
     private BikeProfile profile;
-    private List<RouteInstruction> instructions;
+    private List<RouteInstructionDto> instructions;
     private long calcTime;
     private double cost;
 
@@ -26,7 +26,7 @@ public class GeoJSONProperties {
         this.cost = cost;
     }
 
-    public GeoJSONProperties(double distance, long time, double ascend, double descend, BikeProfile profile, long calcTime, double cost, List<RouteInstruction> instructions) {
+    public GeoJSONProperties(double distance, long time, double ascend, double descend, BikeProfile profile, long calcTime, double cost, List<RouteInstructionDto> instructions) {
         this.distance = distance;
         this.time = time;
         this.ascend = ascend;
@@ -69,11 +69,11 @@ public class GeoJSONProperties {
         this.descend = descend;
     }
 
-    public List<RouteInstruction> getInstructions() {
+    public List<RouteInstructionDto> getInstructions() {
         return instructions;
     }
 
-    public void setInstructions(List<RouteInstruction> instructions) {
+    public void setInstructions(List<RouteInstructionDto> instructions) {
         this.instructions = instructions;
     }
 
@@ -89,7 +89,15 @@ public class GeoJSONProperties {
         return calcTime;
     }
 
-    public void setCalcTime(int calcTime) {
+    public void setCalcTime(long calcTime) {
         this.calcTime = calcTime;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 }

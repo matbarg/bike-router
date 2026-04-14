@@ -107,15 +107,14 @@ function makeRequest() {
         requestRoute(routePoints, {
             profile: "FAST",
             mode: "CUSTOM",
-            speed: 20,
-            preferences: preferences,
+            preferencesDto: preferences,
             color: "rgb(98,250,237)",
         });
 
+        /*
         requestRoute(routePoints, {
             profile: "FAST",
             mode: "CUSTOM",
-            speed: 20,
             preferences: {
                 avoidBadSurfaces: "DEFAULT",
                 avoidTraffic: "DEFAULT",
@@ -127,27 +126,24 @@ function makeRequest() {
         });
 
         setShareRouteLink({points: routePoints, preferences: preferences});
+         */
     } else {
         // test out each profile preset
         const requests = [{
             profile: "FAST",
             mode: "PRESET",
-            speed: 20,
             color: "rgb(234,101,43)",
         }, {
             profile: "SAFE",
             mode: "PRESET",
-            speed: 18,
             color: "rgba(0,102,255)",
         }, {
             profile: "COMFORT",
             mode: "PRESET",
-            speed: 15,
             color: "rgba(174,90,244)",
         }, {
             profile: "SCENIC",
             mode: "PRESET",
-            speed: 17,
             color: "rgba(58,223,80)",
         }];
 
@@ -165,9 +161,10 @@ function requestRoute(points, r) {
             "lat": p.lat,
             "lon": p.lng
         })),
-        speed: r.speed,
-        preferences: r.preferences
+        preferencesDto: r.preferencesDto
     };
+
+    console.log("Request body: ", body);
 
     fetch('http://localhost:8080/api/route', {
         method: "POST",
@@ -175,7 +172,10 @@ function requestRoute(points, r) {
         body: JSON.stringify(body)
     })
         .then(res => res.json())
-        .then(route => addRoute(route, r.color))
+        .then(route => {
+            console.log("Response body: ", route);
+            addRoute(route, r.color);
+        })
         .catch(err => console.log(err));
 }
 
@@ -203,7 +203,7 @@ function addRoute(route, color) {
 
 function routeCardHTML(routeResult, color, routeId) {
     const distance = (routeResult.properties.distance / 1000).toFixed(2);
-    const ascend = routeResult.properties.descend.toFixed(0);
+    const ascend = routeResult.properties.ascend.toFixed(0);
     const descend = routeResult.properties.descend.toFixed(0);
 
     return `<div class="route-card" data-route-id="${routeId}" style="border-left-color: ${color}">
@@ -287,11 +287,9 @@ function getRequestPreferences() {
     const preferencesForm = document.getElementById("request-preferences");
 
     return {
-        avoidBadSurfaces: preferencesForm.elements["avoidBadSurfaces"].value,
-        avoidTraffic: preferencesForm.elements["avoidHills"].value,
-        avoidHills: preferencesForm.elements["avoidTraffic"].value,
-        preferBikeInfra: preferencesForm.elements["preferBikeInfra"].value,
-        preferParks: preferencesForm.elements["preferParks"].value,
+        surface: preferencesForm.elements["avoidBadSurfaces"].value,
+        hills: preferencesForm.elements["avoidHills"].value,
+        bikeInfra: preferencesForm.elements["preferBikeInfra"].value,
     };
 }
 
@@ -309,6 +307,7 @@ document.querySelector(".dec-stop").addEventListener("click", () => {
     }
 });
 
+/*
 document.getElementById("profile").addEventListener("change", e => {
     const selectedProfile = e.target.value;
 
@@ -355,7 +354,9 @@ function selectProfilePreferences(profile) {
     preferencesForm.elements["preferBikeInfra"].value = profile.preferBikeInfra;
     preferencesForm.elements["preferParks"].value = profile.preferParks;
 }
+*/
 
+/*
 document.getElementById("use-preferences").addEventListener("change", e => {
     if (e.target.checked) {
         document.getElementById("preferences").classList.remove("hidden");
@@ -363,7 +364,9 @@ document.getElementById("use-preferences").addEventListener("change", e => {
         document.getElementById("preferences").classList.add("hidden");
     }
 });
+*/
 
+/*
 function setShareRouteLink(routeRequest) {
     const from = routeRequest.points[0];
     const to = routeRequest.points[routeRequest.points.length - 1];
@@ -398,7 +401,6 @@ function loadRouteFromURL(params) {
     requestRoute(routePoints, {
         profile: "FAST",
         mode: "CUSTOM",
-        speed: 20,
         preferences: {
             avoidBadSurfaces: params.get('avoid_bad_surfaces') || 'DEFAULT',
             avoidTraffic: params.get('avoid_traffic') || 'DEFAULT',
@@ -416,3 +418,4 @@ if (params.size > 0) {
     console.log("load route from url");
     loadRouteFromURL(params);
 }
+ */

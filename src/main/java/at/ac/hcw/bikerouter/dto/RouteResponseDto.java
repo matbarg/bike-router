@@ -1,4 +1,4 @@
-package at.ac.hcw.bikerouter.model;
+package at.ac.hcw.bikerouter.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,13 +19,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *     }
  *  }
  */
-public class RouteResponse {
+public class RouteResponseDto {
     private final String type = "Feature";
     private final GeoJSONGeometry geometry;
     private final GeoJSONProperties properties;
 
     @JsonCreator
-    public RouteResponse(
+    public RouteResponseDto(
             @JsonProperty("geometry") GeoJSONGeometry geometry,
             @JsonProperty("properties") GeoJSONProperties properties) {
         this.geometry = geometry;

@@ -16,7 +16,7 @@ public class GHConfig {
 
         GraphHopper hopper = new GraphHopper();
 
-        hopper.setOSMFile("src/main/resources/data/austria-251026.osm.pbf");
+        hopper.setOSMFile("src/main/resources/data/austria-latest.osm.pbf");
 
         hopper.setElevationProvider(new SRTMProvider());
 

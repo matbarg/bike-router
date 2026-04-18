@@ -23,7 +23,7 @@ public class GHConfig {
         hopper.setGraphHopperLocation("target/graph-cache");
 
         hopper.setEncodedValuesString(
-                "car_access, bike_priority, bike_access, roundabout, bike_average_speed, bike_road_access, foot_road_access, average_slope, mtb_rating, hike_rating, country, road_class, surface, bike_network, get_off_bike, max_speed"
+                "car_access, bike_priority, bike_access, roundabout, bike_average_speed, bike_road_access, foot_road_access, average_slope, mtb_rating, hike_rating, country, road_class, surface, bike_network, get_off_bike, max_speed, road_environment, ferry_speed, cycleway"
         );
 
         hopper.setProfiles(

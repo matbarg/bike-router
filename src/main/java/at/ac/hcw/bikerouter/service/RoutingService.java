@@ -44,7 +44,8 @@ public class RoutingService {
                 //"smoothness",
                 "max_speed",
                 "road_class",
-                "bike_network");
+                "bike_network",
+                "cycleway");
         ghRequest.setPathDetails(details);
 
         if (request.getMode() == RoutingMode.PRESET) {

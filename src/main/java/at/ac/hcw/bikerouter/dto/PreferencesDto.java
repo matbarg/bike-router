@@ -19,6 +19,18 @@ public class PreferencesDto {
     @DecimalMax(DECIMAL_MAX)
     private double hills = 1.0;
 
+    @DecimalMin(DECIMAL_MIN)
+    @DecimalMax(DECIMAL_MAX)
+    private double carFree = 1.0;
+
+    @DecimalMin(DECIMAL_MIN)
+    @DecimalMax(DECIMAL_MAX)
+    private double mainRoads = 1.0;
+
+    @DecimalMin(DECIMAL_MIN)
+    @DecimalMax(DECIMAL_MAX)
+    private double residential = 1.0;
+
     public double getBikeInfra() {
         return bikeInfra;
     }
@@ -43,12 +55,38 @@ public class PreferencesDto {
         this.hills = hills;
     }
 
+    public double getCarFree() {
+        return carFree;
+    }
+
+    public void setCarFree(double carFree) {
+        this.carFree = carFree;
+    }
+
+    public double getMainRoads() {
+        return mainRoads;
+    }
+
+    public void setMainRoads(double mainRoads) {
+        this.mainRoads = mainRoads;
+    }
+
+    public double getResidential() {
+        return residential;
+    }
+
+    public void setResidential(double residential) {
+        this.residential = residential;
+    }
+
     @Override
     public String toString() {
         return "Preferences weights{" +
                 "surfaces=" + surfaces +
                 ", hills=" + hills +
                 ", bike infra=" + bikeInfra +
+                ", car free=" + bikeInfra +
+                ", residential=" +
                 '}';
     }
 }

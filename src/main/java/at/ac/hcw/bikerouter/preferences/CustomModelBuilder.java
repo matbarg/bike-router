@@ -111,6 +111,9 @@ public class CustomModelBuilder {
         weighBikeInfra(model, preferences.getBikeInfra());
         weighSurfaces(model, preferences.getSurfaces());
         weighHills(model, preferences.getHills());
+        weighCarFree(model, preferences.getCarFree());
+        weighMainRoads(model, preferences.getMainRoads());
+        weighResidential(model, preferences.getResidential());
 
         return model;
     }

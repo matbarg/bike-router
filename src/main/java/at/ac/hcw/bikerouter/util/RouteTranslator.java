@@ -30,7 +30,7 @@ public class RouteTranslator {
         // turn the PointList into a List of double arrays and add it to the GeoJSONGeometry
         List<Double[]> coordinates = new ArrayList<>();
 
-        route.getPoints().forEach(ghPoint3D -> coordinates.add(new Double[] {ghPoint3D.getLon(), ghPoint3D.getLat()}));
+        route.getPoints().forEach(ghPoint3D -> coordinates.add(new Double[]{ghPoint3D.getLon(), ghPoint3D.getLat()}));
 
         GeoJSONGeometry geometry = new GeoJSONGeometry(coordinates);
 
@@ -52,38 +52,19 @@ public class RouteTranslator {
 
     // with instructions
     public RouteResponseDto toAPIResponse(ResponsePath route, BikeProfile profile, long calcTime, Translation tr) {
-        // turn the PointList into a List of double arrays and add it to the GeoJSONGeometry
-        List<Double[]> coordinates = new ArrayList<>();
-
-        route.getPoints().forEach(ghPoint3D -> coordinates.add(new Double[] {ghPoint3D.getLon(), ghPoint3D.getLat()}));
-
-        GeoJSONGeometry geometry = new GeoJSONGeometry(coordinates);
-
         List<RouteInstructionDto> instructions = new ArrayList<>();
 
         for (Instruction i : route.getInstructions()) {
             instructions.add(new RouteInstructionDto(
                     i.getName(),
-                     i.getDistance(),
+                    i.getDistance(),
                     (int) i.getTime(),
                     i.getTurnDescription(tr)
             ));
         }
 
-        GeoJSONProperties properties = new GeoJSONProperties(
-                route.getDistance(),
-                route.getTime(),
-                route.getAscend(),
-                route.getDescend(),
-                profile,
-                calcTime,
-                route.getRouteWeight(),
-                instructions
-        );
-
-        return new RouteResponseDto(
-                geometry,
-                properties
-        );
+        RouteResponseDto response = toAPIResponse(route, profile, calcTime);
+        response.getProperties().setInstructions(instructions);
+        return response;
     }
 }

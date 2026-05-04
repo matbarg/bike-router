@@ -1,6 +1,6 @@
 package at.ac.hcw.bikerouter.preferences;
 
-public class ProfilePresets {
+public class ProfilePresetsDiscrete {
     public static Preferences safe() {
         Preferences p = new Preferences();
         p.setAvoidTraffic(AvoidTraffic.LOW);

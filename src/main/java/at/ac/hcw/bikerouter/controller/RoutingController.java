@@ -30,7 +30,7 @@ public class RoutingController {
         // Destination: FH Campus
         PointDto destination = new PointDto(48.15975, 16.38305);
 
-        RouteRequestDto request = new RouteRequestDto(start, destination, BikeProfile.FAST, RoutingMode.PRESET, null);
+        RouteRequestDto request = new RouteRequestDto(start, destination, BikeProfile.BASE, RoutingMode.PRESET, null);
 
         return routingService.route(request);
     }

@@ -86,7 +86,7 @@ public class PreferencesDto {
                 ", hills=" + hills +
                 ", bike infra=" + bikeInfra +
                 ", car free=" + bikeInfra +
-                ", residential=" +
+                ", residential=" + residential +
                 '}';
     }
 }

@@ -44,12 +44,12 @@ public class GHConfig {
         hopper.setGraphHopperLocation("target/graph-cache");
         hopper.setEncodedValuesString(String.join(", ", encodedValues));
         hopper.setProfiles(
-                new Profile(BikeProfile.FAST.label).setCustomModel(CustomModelBuilder.fast()),
+                new Profile(BikeProfile.BASE.label).setCustomModel(CustomModelBuilder.base()),
                 new Profile(BikeProfile.SAFE.label).setCustomModel(CustomModelBuilder.safe()),
                 new Profile(BikeProfile.COMFORT.label).setCustomModel(CustomModelBuilder.comfort()),
                 new Profile(BikeProfile.SCENIC.label).setCustomModel(CustomModelBuilder.scenic())
         );
-        LOG.info("Default profiles: " + hopper.getProfile(BikeProfile.FAST.label).getCustomModel());
+        LOG.info("Default profiles: " + hopper.getProfile(BikeProfile.BASE.label).getCustomModel());
 
         hopper.importOrLoad();
         LOG.info("Graphhopper finished loading");

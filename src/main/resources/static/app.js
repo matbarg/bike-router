@@ -105,7 +105,7 @@ function makeRequest() {
         const preferences = getRequestPreferences()
 
         requestRoute(routePoints, {
-            profile: "FAST",
+            profile: "BASE",
             mode: "CUSTOM",
             preferencesDto: preferences,
             color: "rgb(98,250,237)",
@@ -113,7 +113,7 @@ function makeRequest() {
 
         /*
         requestRoute(routePoints, {
-            profile: "FAST",
+            profile: "BASE",
             mode: "CUSTOM",
             preferences: {
                 avoidBadSurfaces: "DEFAULT",
@@ -130,7 +130,7 @@ function makeRequest() {
     } else {
         // test out each profile preset
         const requests = [{
-            profile: "FAST",
+            profile: "BASE",
             mode: "PRESET",
             color: "rgb(234,101,43)",
         }, {
@@ -290,6 +290,9 @@ function getRequestPreferences() {
         surface: preferencesForm.elements["avoidBadSurfaces"].value,
         hills: preferencesForm.elements["avoidHills"].value,
         bikeInfra: preferencesForm.elements["preferBikeInfra"].value,
+        carFree: 1.0,
+        mainRoads: 1.0,
+        residential: 1.0
     };
 }
 
@@ -312,7 +315,7 @@ document.getElementById("profile").addEventListener("change", e => {
     const selectedProfile = e.target.value;
 
     const profilePreferences = {
-        FAST: {
+        BASE: {
             avoidBadSurfaces: "DEFAULT",
             avoidTraffic: "DEFAULT",
             avoidHills: "DEFAULT",
@@ -399,7 +402,7 @@ function loadRouteFromURL(params) {
     ]
 
     requestRoute(routePoints, {
-        profile: "FAST",
+        profile: "BASE",
         mode: "CUSTOM",
         preferences: {
             avoidBadSurfaces: params.get('avoid_bad_surfaces') || 'DEFAULT',

@@ -1,7 +1,7 @@
 package at.ac.hcw.bikerouter.preferences;
 
 public enum BikeProfile {
-    FAST("bike_fast"),
+    BASE("bike_base"),
     SAFE("bike_safe"),
     COMFORT("bike_comfort"),
     SCENIC("bike_scenic");

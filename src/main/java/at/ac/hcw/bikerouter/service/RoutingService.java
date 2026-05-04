@@ -52,7 +52,7 @@ public class RoutingService {
             System.out.println("Preset mode. Use profile " + request.getProfile());
             ghRequest.setProfile(request.getProfile().label);
         } else if (request.getMode() == RoutingMode.CUSTOM) {
-            ghRequest.setProfile(BikeProfile.FAST.label);
+            ghRequest.setProfile(BikeProfile.BASE.label);
             ghRequest.setCustomModel(CustomModelBuilder.build(request.getPreferencesDto()));
         }
 

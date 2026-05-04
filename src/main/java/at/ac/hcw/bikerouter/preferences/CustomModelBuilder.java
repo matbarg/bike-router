@@ -59,24 +59,27 @@ public class CustomModelBuilder {
         m.addToPriority(If("road_class == RESIDENTIAL", MULTIPLY, String.valueOf(factor)));
     }
 
-    public static CustomModel fast() {
-        return GHUtility.loadCustomModelFromJar("bike.json");
+    public static CustomModel base() {
+        CustomModel base = GHUtility.loadCustomModelFromJar("bike.json");
+        base.getPriority().removeIf(s -> s.condition() != null && s.condition().contains("bike_network"));
+        CustomModel elevation = GHUtility.loadCustomModelFromJar("bike_elevation.json");
+        return CustomModel.merge(base, elevation);
     }
 
     public static CustomModel safe() {
-        return build(ProfilePresets.safe());
+        return build(ProfilePresetsDiscrete.safe());
     }
 
     public static CustomModel comfort() {
-        return build(ProfilePresets.comfort());
+        return build(ProfilePresetsDiscrete.comfort());
     }
 
     public static CustomModel scenic() {
-        return build(ProfilePresets.scenic());
+        return build(ProfilePresetsDiscrete.scenic());
     }
 
     private static CustomModel mergeToBase(CustomModel m) {
-        return CustomModel.merge(fast(), m);
+        return CustomModel.merge(base(), m);
     }
 
     public static CustomModel build(Preferences pref) {
@@ -115,6 +118,6 @@ public class CustomModelBuilder {
         weighMainRoads(model, preferences.getMainRoads());
         weighResidential(model, preferences.getResidential());
 
-        return model;
+        return mergeToBase(model);
     }
 }

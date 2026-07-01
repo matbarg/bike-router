@@ -5,6 +5,7 @@ import at.ac.hcw.bikerouter.preferences.CustomModelBuilder;
 import com.graphhopper.GraphHopper;
 import com.graphhopper.config.Profile;
 import com.graphhopper.reader.dem.SRTMProvider;
+import com.graphhopper.routing.util.EncodingManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -43,12 +44,7 @@ public class GHConfig {
         hopper.setElevationProvider(new SRTMProvider());
         hopper.setGraphHopperLocation("target/graph-cache");
         hopper.setEncodedValuesString(String.join(", ", encodedValues));
-        hopper.setProfiles(
-                new Profile(BikeProfile.BASE.label).setCustomModel(CustomModelBuilder.base()),
-                new Profile(BikeProfile.SAFE.label).setCustomModel(CustomModelBuilder.safe()),
-                new Profile(BikeProfile.COMFORT.label).setCustomModel(CustomModelBuilder.comfort()),
-                new Profile(BikeProfile.SCENIC.label).setCustomModel(CustomModelBuilder.scenic())
-        );
+        hopper.setProfiles(new Profile(BikeProfile.BASE.label).setCustomModel(CustomModelBuilder.base()));
         LOG.info("Default profiles: " + hopper.getProfile(BikeProfile.BASE.label).getCustomModel());
 
         hopper.importOrLoad();

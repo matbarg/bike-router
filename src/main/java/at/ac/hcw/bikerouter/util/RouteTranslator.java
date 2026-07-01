@@ -14,6 +14,12 @@ import java.util.List;
 
 @Component
 public class RouteTranslator {
+    private final RouteFeaturesCalculator routeFeaturesCalculator;
+
+    public RouteTranslator(RouteFeaturesCalculator routeFeaturesCalculator) {
+        this.routeFeaturesCalculator = routeFeaturesCalculator;
+    }
+
     public GHRequest toGHRequest(RouteRequestDto apiRequest) {
         GHRequest ghRequest = new GHRequest();
         ghRequest.setProfile(apiRequest.getProfile().label);
@@ -36,13 +42,13 @@ public class RouteTranslator {
 
         GeoJSONProperties properties = new GeoJSONProperties(
                 route.getDistance(),
-                route.getTime(),
+                route.getTime() / 60_000.0,
                 route.getAscend(),
                 route.getDescend(),
                 profile,
-                calcTime,
-                route.getRouteWeight()
+                calcTime
         );
+        properties.setRouteFeatures(routeFeaturesCalculator.calculateRouteFeaturesRatios(route));
 
         return new RouteResponseDto(
                 geometry,
@@ -51,7 +57,7 @@ public class RouteTranslator {
     }
 
     // with instructions
-    public RouteResponseDto toAPIResponse(ResponsePath route, BikeProfile profile, long calcTime, Translation tr) {
+    public RouteResponseDto toAPIResponseWithInstructions(ResponsePath route, BikeProfile profile, long calcTime, Translation tr) {
         List<RouteInstructionDto> instructions = new ArrayList<>();
 
         for (Instruction i : route.getInstructions()) {

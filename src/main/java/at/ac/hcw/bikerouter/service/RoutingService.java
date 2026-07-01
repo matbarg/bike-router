@@ -45,7 +45,9 @@ public class RoutingService {
                 "max_speed",
                 "road_class",
                 "bike_network",
-                "cycleway");
+                "cycleway",
+                "average_slope"
+        );
         ghRequest.setPathDetails(details);
 
         if (request.getMode() == RoutingMode.PRESET) {
@@ -53,7 +55,7 @@ public class RoutingService {
             ghRequest.setProfile(request.getProfile().label);
         } else if (request.getMode() == RoutingMode.CUSTOM) {
             ghRequest.setProfile(BikeProfile.BASE.label);
-            ghRequest.setCustomModel(CustomModelBuilder.build(request.getPreferencesDto()));
+            ghRequest.setCustomModel(CustomModelBuilder.from(request.getPreferencesDto()));
         }
 
         Instant start = Instant.now();
@@ -73,7 +75,7 @@ public class RoutingService {
 
         if (request.isWithInstructions()) {
             Translation tr = hopper.getTranslationMap().getWithFallBack(Locale.UK);
-            return routeTranslator.toAPIResponse(path, request.getProfile(), timeElapsed.toMillis(), tr);
+            return routeTranslator.toAPIResponseWithInstructions(path, request.getProfile(), timeElapsed.toMillis(), tr);
         } else {
             return routeTranslator.toAPIResponse(path, request.getProfile(), timeElapsed.toMillis());
         }

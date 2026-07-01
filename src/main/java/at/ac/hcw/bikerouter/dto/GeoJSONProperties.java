@@ -3,30 +3,30 @@ package at.ac.hcw.bikerouter.dto;
 import at.ac.hcw.bikerouter.preferences.BikeProfile;
 
 import java.util.List;
+import java.util.Map;
 
 public class GeoJSONProperties {
     private double distance;
-    private long time;
+    private double time;
     private double ascend;
     private double descend;
     private BikeProfile profile;
     private List<RouteInstructionDto> instructions;
     private long calcTime;
-    private double cost;
+    private Map<String, Map<String, Double>> routeFeatures;
 
     public GeoJSONProperties() {}
 
-    public GeoJSONProperties(double distance, long time, double ascend, double descend, BikeProfile profile, long calcTime, double cost) {
+    public GeoJSONProperties(double distance, double time, double ascend, double descend, BikeProfile profile, long calcTime) {
         this.distance = distance;
         this.time = time;
         this.ascend = ascend;
         this.descend = descend;
         this.profile = profile;
         this.calcTime = calcTime;
-        this.cost = cost;
     }
 
-    public GeoJSONProperties(double distance, long time, double ascend, double descend, BikeProfile profile, long calcTime, double cost, List<RouteInstructionDto> instructions) {
+    public GeoJSONProperties(double distance, double time, double ascend, double descend, BikeProfile profile, long calcTime, List<RouteInstructionDto> instructions) {
         this.distance = distance;
         this.time = time;
         this.ascend = ascend;
@@ -34,7 +34,6 @@ public class GeoJSONProperties {
         this.instructions = instructions;
         this.profile = profile;
         this.calcTime = calcTime;
-        this.cost = cost;
     }
 
     public double getDistance() {
@@ -45,11 +44,11 @@ public class GeoJSONProperties {
         this.distance = distance;
     }
 
-    public long getTime() {
+    public double getTime() {
         return time;
     }
 
-    public void setTime(long time) {
+    public void setTime(double time) {
         this.time = time;
     }
 
@@ -93,11 +92,11 @@ public class GeoJSONProperties {
         this.calcTime = calcTime;
     }
 
-    public double getCost() {
-        return cost;
+    public Map<String, Map<String, Double>> getRouteFeatures() {
+        return routeFeatures;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    public void setRouteFeatures(Map<String, Map<String, Double>> routeFeatures) {
+        this.routeFeatures = routeFeatures;
     }
 }

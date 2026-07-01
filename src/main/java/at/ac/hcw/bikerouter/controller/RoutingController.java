@@ -30,7 +30,7 @@ public class RoutingController {
         // Destination: FH Campus
         PointDto destination = new PointDto(48.15975, 16.38305);
 
-        RouteRequestDto request = new RouteRequestDto(start, destination, BikeProfile.BASE, RoutingMode.PRESET, null);
+        RouteRequestDto request = new RouteRequestDto(start, destination, BikeProfile.BASE, RoutingMode.PRESET);
 
         return routingService.route(request);
     }
@@ -43,7 +43,7 @@ public class RoutingController {
         //RoutePoint destination = new RoutePoint(48.15975, 16.38305); // FH Campus
         PointDto destination = new PointDto(48.19982, 16.31119); // Hütteldorfer Straße U
 
-        RouteRequestDto request = new RouteRequestDto(start, destination, profile, RoutingMode.PRESET, null);
+        RouteRequestDto request = new RouteRequestDto(start, destination, profile, RoutingMode.PRESET);
 
         return routingService.route(request);
     }

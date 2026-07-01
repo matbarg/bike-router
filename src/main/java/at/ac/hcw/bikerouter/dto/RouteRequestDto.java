@@ -12,7 +12,6 @@ public class RouteRequestDto {
     private List<PointDto> points;
     private BikeProfile profile;
     private RoutingMode mode;
-    private Preferences preferences;
     private boolean withInstructions = true;
     @Valid
     private PreferencesDto preferencesDto;
@@ -21,23 +20,21 @@ public class RouteRequestDto {
         points = new ArrayList<>();
     }
 
-    public RouteRequestDto(PointDto start, PointDto destination, BikeProfile profile, RoutingMode mode, Preferences preferences) {
+    public RouteRequestDto(PointDto start, PointDto destination, BikeProfile profile, RoutingMode mode) {
         points = new ArrayList<>();
         points.add(start);
         points.add(destination);
         this.profile = profile;
         this.mode = mode;
-        this.preferences = preferences;
     }
 
-    public RouteRequestDto(PointDto start, PointDto destination, List<PointDto> via, BikeProfile profile, RoutingMode mode, Preferences preferences) {
+    public RouteRequestDto(PointDto start, PointDto destination, List<PointDto> via, BikeProfile profile, RoutingMode mode) {
         points = new ArrayList<>();
         points.add(start);
         points.addAll(via);
         points.add(destination);
         this.profile = profile;
         this.mode = mode;
-        this.preferences = preferences;
     }
 
     public List<PointDto> getPoints() {
@@ -62,14 +59,6 @@ public class RouteRequestDto {
 
     public void setMode(RoutingMode mode) {
         this.mode = mode;
-    }
-
-    public Preferences getPreferences() {
-        return preferences;
-    }
-
-    public void setPreferences(Preferences preferences) {
-        this.preferences = preferences;
     }
 
     public PreferencesDto getPreferencesDto() {
